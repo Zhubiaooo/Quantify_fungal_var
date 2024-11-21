@@ -76,5 +76,7 @@ library(glue)
 
 gt(seed_site_infor)
 
+### Notice that,
+### For more picture details, we have further adjusted it in Adobe illustrator.
 
 
