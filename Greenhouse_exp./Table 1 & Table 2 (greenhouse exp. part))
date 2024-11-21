@@ -4,6 +4,7 @@ library(vegan)
 library(ggplot2)
 library(dplyr)
 library(phytools)
+library(funrar)
 
 # Read in the fungal abundance information table
 Green_otu <- read.xlsx("Greenhouse_exp/Greenhouse_data_asv.xlsx", sheet = "Overall_otu", colNames = T, rowNames = T)
@@ -172,7 +173,7 @@ colnames(mantel_result_phy) = c("Test","Mantel_R","P_value","Traits","dist_type"
 
 ## 
 mantel_total_Data = rbind(single_trait_mantel, mantel_result_fun, mantel_result_phy)
-mantel_total_Data$Traits = factor(mantel_total_Data$Traits, levels = c("Plant_phylo","Muti_traits","Phy_Di","Fun_Di","TB","BGB","AGB","RS","RMF","FRR","SRL","Hmax","LCN","LDMC","SLA","Chol","LA"))
+mantel_total_Data$Traits = factor(mantel_total_Data$Traits, levels = c("Plant_phylo","Muti_traits","RS","FRR","SRL","LDMC","SLA","Chol"))
 mantel_total_Data$sig <- ifelse(mantel_total_Data$P_value>0.05, '', ifelse(mantel_total_Data$P_value>0.01, '*', ifelse(mantel_total_Data$P_value>0.001, '**', '***')))
 
 select_traits = c("Chol","SLA","LDMC","FRR","SRL","RS","Muti_traits","Plant_phylo")
@@ -222,22 +223,3 @@ p + annotation_custom(
 
 # p.adjust
 mantel_total_Data$P_value_adj = p.adjust(mantel_total_Data$P_value, method = "holm")
-
-#
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
