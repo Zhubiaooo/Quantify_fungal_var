@@ -23,7 +23,7 @@ DATA-SPECIFIC INFORMATION FOR:
 
 In *Greenhouse_exp* folder
 
-iq_tree.NEWICK
+ iq_tree.NEWICK
 
 Description: Phylogenetic relationship of all experimental species in pot experiment and field survey.
 
@@ -48,7 +48,7 @@ This script contains all the data analysis and visualization code of Fig S4.
 
 In **Field_survey* folder
 
-iq_tree.NEWICK
+ iq_tree.NEWICK
 
 Description: Phylogenetic relationship of all experimental species in pot experiment and field survey.
 
