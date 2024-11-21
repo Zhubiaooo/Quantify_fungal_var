@@ -5,7 +5,7 @@ Field_group = read.xlsx("all_field_data-11-21.xlsx", sheet = "Field_group(all sp
 Field_group$Sample_ID = rownames(Field_group)
 
 # Soil sample abundance information
-#Field_otu_row2 = read.xlsx("Field_data_asv-11-21.xlsx", sheet = "row_otu", colNames = T, rowNames = T)
+#Field_otu_row2 = read.xlsx("Field_data_asv-11-21.xlsx", sheet = "row_otu", colNames = T, rowNames = T) # row ASVs abundance 
 #Field_otu_row = Field_otu_row2[,rownames(Field_group)]
 #Field_otu_row[1:6,1:6]
 #dim(Field_otu_row)
