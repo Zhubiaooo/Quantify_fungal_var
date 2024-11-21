@@ -39,7 +39,7 @@ fungi_Flattening[1:6, 1:6]
 colSums(fungi_Flattening)
 
 ################################################################################
-########################## Table 1 (Field survey) ##############################
+########################## Table S3 (Field survey) #############################
 ################################################################################
 
 Field_group = read.xlsx("all_field_data-11-21.xlsx", sheet = "Field_group(all species)11", rowNames = T, colNames = T)
@@ -87,8 +87,8 @@ permanova_TOTAL$`F` = round(permanova_TOTAL$`F`,2)
 permanova_TOTAL$`q-vaules`=p.adjust(permanova_TOTAL$`Pr(>F)`, method = "holm")
 
 ################################################################################
-
-# Table S3
+########################## Table S4 (Field survey) #############################
+################################################################################
 set.seed(1234)
 total_data = Field_group_scale
 ### full model
@@ -206,7 +206,7 @@ perManova_data$`q-vaules` = round(perManova_data$`q-vaules`, 3)
 perManova_data
 
 ################################################################################
-########################## Table 2 (Field survey) ##############################
+########################## Table S5 (Field survey) #############################
 ################################################################################
 # Mantel test
 # Single trait
