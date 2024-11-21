@@ -1,7 +1,24 @@
+# Custom Style
+library(ggplot2)
+mytheme = theme( panel.background = element_rect(fill='white', colour='black'),
+                 legend.position = "none",
+                 panel.grid=element_blank(), 
+                 legend.title = element_blank(),
+                 legend.text = element_text(size = 8),
+                 legend.background = element_rect(fill = NA), #axis.ticks.length = unit(0.4,"lines"), 
+                 axis.ticks = element_line(color='black'),
+                 axis.line = element_line(colour = "black"), 
+                 axis.title.x = element_text(colour='black', size=13),
+                 axis.title.y = element_text(colour='black', size=13),
+                 axis.text = element_text(colour='black',size=11),
+                 plot.tag = element_text(size = 14, face = "bold")) 
+family_color = c("Acanthaceae"="#332500","Amaranthaceae"="#542D20","Asteraceae" ="#994240","Caryophyllaceae" = "#D75C4D", "Cyperaceae" = "#E68C51",
+                 "Euphorbiaceae" ="#F59D52", "Fabaceae" = "#EFBA55","Lamiaceae" ="#FCD170","Malvaceae"="#FEE1B0", "Onagraceae" = "#C5E0D0",
+                 "Phytolaccaceae" = "#ABDCE0","Poaceae" ="#7FC5D8","Polygonaceae"="#73BCD5", "Solanaceae" = "#528FAC", "Urticaceae" = "#376694", "Verbenaceae" = "#1F466F")
+
 # Loading R packages
 library(openxlsx)
 library(vegan)
-library(ggplot2)
 library(dplyr)
 library(phytools)
 library(funrar)
