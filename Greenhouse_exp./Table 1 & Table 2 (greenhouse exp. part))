@@ -226,9 +226,8 @@ p = ggplot(mantel_total_Data, aes(Traits,dist_type)) +
                                label.theme = element_text(size = 10),
                                frame.colour = "black", frame.linewidth = 0.01)) +
   scale_x_discrete(labels = c("Chol" = "Leaf chlorophyll", "SLA" = "Specific leaf area",
-                              "LDMC" = "Leaf dry matter content","LCN" = "Leaf carbon/nitrogen ratio","SRL" = "Specific root length",
+                              "LDMC" = "Leaf dry matter content","SRL" = "Specific root length",
                               "FRR" = "Fine-root mass ratio", "RS" = "Root-shoot ratio",
-                              "Fun_Di" = "Functional distinctiveness", "Phy_Di" = "Phylogenetic distinctiveness",
                               "Muti_traits" = "Euclidean trait distance", "Plant_phylo" = "Plant phylogenetic distance"), position = "top")
 
 p
