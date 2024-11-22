@@ -3,7 +3,7 @@ This repository contains all the compiled data and code from the work "Quantifyi
 
 DATA & FILE OVERVIEW
 
-The data that support the findings of this study are available on the Figshare digital repository [![DOI](https://zenodo.org/badge/DOI/10.6084/m9.figshare.27880494.svg)](https://doi.org/10.6084/m9.figshare.27880494)
+The data that support the findings of this study are available on the Figshare digital repository. [![DOI](https://zenodo.org/badge/DOI/10.6084/m9.figshare.27880494.svg)](https://doi.org/10.6084/m9.figshare.27880494)
 
 In *Greenhouse_exp* folder
 1)  iq_tree.NEWICK
