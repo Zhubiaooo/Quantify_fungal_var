@@ -61,24 +61,24 @@ drop1(f.sbs1, test = "Chi")
 f.sbs2 <- update(f.sbs1, ~. -Phy_Di_log:Soil_ph)
 AIC(f.sbs2)
 drop1(f.sbs2, test = "Chi")
-f.sbs3 <- update(f.sbs2, ~. -Phy_Di_log:Wcont)
+f.sbs3 <- update(f.sbs2, ~. -Fun_Di_log:Soil_ph)
 AIC(f.sbs3)
 drop1(f.sbs3, test = "Chi")
 f.sbs4 <- update(f.sbs3, ~. -Soil_ph)
 AIC(f.sbs4)
 drop1(f.sbs4, test = "Chi")
-f.sbs5 <- update(f.sbs4, ~. -Fun_Di_log:Soil_ph)
+f.sbs5 <- update(f.sbs4, ~. -Fun_Di_log:Precipitation)
 AIC(f.sbs5)
 drop1(f.sbs5, test = "Chi")
-f.sbs6 <- update(f.sbs5, ~. -Phy_Di_log:Precipitation)
+f.sbs6 <- update(f.sbs5, ~. -Phy_Di_log:Wcont)
 AIC(f.sbs6)
 drop1(f.sbs6, test = "Chi")
-f.sbs7 <- update(f.sbs6, ~. -Fun_Di_log:Wcont)
+f.sbs7 <- update(f.sbs6, ~. -Phy_Di_log:Precipitation)
 AIC(f.sbs7)
 drop1(f.sbs7, test = "Chi")
-f.sbs8 <- update(f.sbs7, ~. -Fun_Di_log:Precipitation)
+f.sbs8 <- update(f.sbs7, ~. -Precipitation)
 drop1(f.sbs8, test = "Chi")
-f.sbs9 <- update(f.sbs8, ~. -Precipitation)
+f.sbs9 <- update(f.sbs8, ~. -Fun_Di_log:Wcont)
 drop1(f.sbs9, test = "Chi")
 f.sbs10 <- update(f.sbs9, ~. -Wcont)
 drop1(f.sbs10, test = "Chi")
@@ -103,11 +103,11 @@ as.data.frame(vif(f.sbs.fin))
 
 
 ### p.adjust
-tables2<-summary(f.sbs.fin)$tTable
+tables2<- as.data.frame(car::Anova(f.sbs.fin, type = 3))
 tables2=tables2[-which(rownames(tables2) == "(Intercept)"),]
 tables2=as.data.frame(tables2)
-tables2$`q-vaules`=p.adjust(tables2$`p-value`, method = "holm")
-tables2$`p-value` = round(tables2$`p-value`, 3)
+tables2$`q-vaules`=p.adjust(tables2$`Pr(>Chisq)`, method = "holm")
+tables2$`p-value` = round(tables2$`Pr(>Chisq)`, 3)
 tables2$`q-vaules` = round(tables2$`q-vaules`, 3)
 tables2$Parameter = rownames(tables2)
 
@@ -151,7 +151,7 @@ table_anova
 
 #
 library(effectsize)
-MegaModelSummary = as.data.frame(effectsize(f.sbs.fin))[-1,]
+MegaModelSummary = as.data.frame(effectsize::effectsize(f.sbs.fin))[-1,]
 MegaModelSummary$Parameter2 = c("Site pool","Phylo-Dist", "Funct-Dist", "Wcont", "Soil N", "Temperature", 
                                 "Phylo-Dist × Temperature", "Funct-Dist × Temperature", "Funct-Dist × Soil N")
 MegaModelSummary$Parameter2 = factor(MegaModelSummary$Parameter2, levels = rev(c("Site pool","Phylo-Dist", "Funct-Dist", "Wcont", "Soil N", "Temperature", 
@@ -165,7 +165,6 @@ MegaModelSummary$Group = c("Site pool", "Plant attributes", "Plant attributes", 
 MegaModelSummary$Group = factor(MegaModelSummary$Group, levels = c("Site pool", "Plant attributes", "Soil properties", "Climate", "Interaction"))
 
 
-
 ggplot(MegaModelSummary, aes(x = Parameter2, y = Std_Coefficient, fill = Group))+
   geom_errorbar(aes(ymin=CI_low, ymax=CI_high), width=0.2, size = 0.8, color = "black")+
   geom_point(size = 3.5, pch = 21)+
@@ -174,7 +173,7 @@ ggplot(MegaModelSummary, aes(x = Parameter2, y = Std_Coefficient, fill = Group))
             hjust =  -0.4, vjust = 0.2, angle = 0, color = "black",size = 3.2) + 
   #annotate("text", x = 9.5 , y = 0.08,label = "Best model: R2m = 0.30, R2c = 0.32", colour="black", size = 4) +  
   annotate("text", x = 9.46, y = 0.08,
-           label = expression("Best model: " * italic(R)^2 * "m = 0.30, " * italic(R)^2 * "c = 0.32"),
+           label = expression("Best model: " * italic(R)^2 * "m = 0.31, " * italic(R)^2 * "c = 0.33"),
            colour = "black", size = 4) + 
   labs(x = '', y = 'Standard regression coefficients', color = '', tag = "a") +  
   theme_classic() + coord_flip() +  
@@ -218,7 +217,6 @@ ggplot()+
         axis.line.x = element_line(linewidth = NA))+
   guides(fill = guide_legend(title = "Province",ncol = 3, nrow = 2, override.aes = list(shape = 22, size=0.2))) +
   labs(y = "Relative effect of estimates (%)") -> p3b; p3b
-
 
 # Phylo-Dist × Temperature
 library(effects)
