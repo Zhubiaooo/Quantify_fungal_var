@@ -67,7 +67,7 @@ drop1(f.sbs3, test = "Chi")
 f.sbs4 <- update(f.sbs3, ~. -Phy_Di_log:Precipitation)
 AIC(f.sbs4)
 drop1(f.sbs4, test = "Chi")
-f.sbs5 <- update(f.sbs4, ~. -Phy_Di_log:Soil_N )
+f.sbs5 <- update(f.sbs4, ~. -Phy_Di_log:Soil_N)
 AIC(f.sbs5)
 drop1(f.sbs5, test = "Chi")
 f.sbs6 <- update(f.sbs5, ~. -Wcont)
@@ -87,10 +87,11 @@ drop1(f.sbs11, test = "Chi")
 f.sbs12 <- update(f.sbs11, ~. -Fun_Di_log:Precipitation)
 drop1(f.sbs12, test = "Chi")
 f.sbs13 <- update(f.sbs12, ~. -Fun_Di_log:Soil_ph)
+AIC(f.sbs13)
 drop1(f.sbs13, test = "Chi")
 f.sbs14 <- update(f.sbs13, ~. -Soil_ph)
+AIC(f.sbs14)
 drop1(f.sbs14, test = "Chi")
-
 
 library(lmtest)
 lrtest(f.sbs4,f.sbs5,f.sbs6,f.sbs7,f.sbs8,f.sbs9,f.sbs10,f.sbs11,f.sbs12,f.sbs13,f.sbs14)
@@ -106,11 +107,11 @@ as.data.frame(vif(f.sbs.fin))
 summary(f.sbs.fin)
 
 ### p.adjust
-tables2<-summary(f.sbs.fin)$tTable
+tables2<- as.data.frame(car::Anova(f.sbs.fin, type = 3))
 tables2=tables2[-which(rownames(tables2) == "(Intercept)"),]
 tables2=as.data.frame(tables2)
-tables2$`q-vaules`=p.adjust(tables2$`p-value`, method = "holm")
-tables2$`p-value` = round(tables2$`p-value`, 3)
+tables2$`q-vaules`=p.adjust(tables2$`Pr(>Chisq)`, method = "holm")
+tables2$`p-value` = round(tables2$`Pr(>Chisq)`, 3)
 tables2$`q-vaules` = round(tables2$`q-vaules`, 3)
 tables2$Parameter = rownames(tables2)
 
