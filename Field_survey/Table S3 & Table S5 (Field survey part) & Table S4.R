@@ -133,10 +133,10 @@ AICcPermanova::AICc_permanova2(Simplified_mod993)
 mod_Simplified3 = as.data.frame(AICcPermanova::AICc_permanova2(Simplified_mod993)); mod_Simplified3$form = "mod3 ~ -Phy_Di_log:Soil_ph"
 
 
-## Fun_Di_log:Tave 
+## Fun_Di_log:Soil_ph 
 Simplified_mod994 = with(total_data, adonis2(BC_dist_field ~ Site_pool + Phy_Di_log + Fun_Di_log + Soil_ph + Wcont + Soil_N + Tave + Precipitation + 
                                                Phy_Di_log:Tave + Phy_Di_log:Precipitation + Phy_Di_log:Soil_N + Phy_Di_log:Wcont + 
-                                               Fun_Di_log:Soil_ph + Fun_Di_log:Wcont, 
+                                               Fun_Di_log:Tave + Fun_Di_log:Wcont, 
                                              data = total_data, permutations = 999, strata = Years))
 
 Simplified_mod994
@@ -144,7 +144,7 @@ AICcPermanova::AICc_permanova2(Simplified_mod994)
 mod_Simplified4 = as.data.frame(AICcPermanova::AICc_permanova2(Simplified_mod994)); mod_Simplified4$form = "mod4 ~ -Fun_Di_log:Soil_ph"
 
 
-## Fun_Di_log:Soil_ph 
+## Fun_Di_log:Tave 
 Simplified_mod995 = with(total_data, adonis2(BC_dist_field ~ Site_pool + Phy_Di_log + Fun_Di_log + Soil_ph + Wcont + Soil_N + Tave + Precipitation + 
                                                Phy_Di_log:Tave + Phy_Di_log:Precipitation + Phy_Di_log:Soil_N + Phy_Di_log:Wcont + 
                                                Fun_Di_log:Wcont, 
@@ -155,9 +155,10 @@ AICcPermanova::AICc_permanova2(Simplified_mod995)
 mod_Simplified5 = as.data.frame(AICcPermanova::AICc_permanova2(Simplified_mod995)); mod_Simplified5$form = "mod5 ~ -Fun_Di_log:Tave"
 
 
-## Fun_Di_log:Wcont
+## Phy_Di_log:Soil_N
 Simplified_mod996 = with(total_data, adonis2(BC_dist_field ~ Site_pool + Phy_Di_log + Fun_Di_log + Soil_ph + Wcont + Soil_N + Tave + Precipitation + 
-                                               Phy_Di_log:Tave + Phy_Di_log:Precipitation + Phy_Di_log:Soil_N + Phy_Di_log:Wcont, 
+                                               Phy_Di_log:Tave + Phy_Di_log:Precipitation + Phy_Di_log:Wcont + 
+                                               Fun_Di_log:Wcont,
                                              data = total_data, permutations = 999, strata = Years))
 
 Simplified_mod996
@@ -165,27 +166,18 @@ AICcPermanova::AICc_permanova2(Simplified_mod996)
 mod_Simplified6 = as.data.frame(AICcPermanova::AICc_permanova2(Simplified_mod996)); mod_Simplified6$form = "mod6 ~ -Phy_Di_log:Soil_N"
 
 
-## Phy_Di_log:Soil_N
+## Fun_Di_log:Wcont
 Simplified_mod997 = with(total_data, adonis2(BC_dist_field ~ Site_pool + Phy_Di_log + Fun_Di_log + Soil_ph + Wcont + Soil_N + Tave + Precipitation + 
-                                               Phy_Di_log:Tave + Phy_Di_log:Precipitation + Phy_Di_log:Wcont, 
+                                               Phy_Di_log:Tave + Phy_Di_log:Precipitation + Phy_Di_log:Wcont,
                                              data = total_data, permutations = 999, strata = Years))
 
 Simplified_mod997
 AICcPermanova::AICc_permanova2(Simplified_mod997)
 mod_Simplified7 = as.data.frame(AICcPermanova::AICc_permanova2(Simplified_mod997)); mod_Simplified7$form = "mod7 ~ -Fun_Di_log:Wcont"
 
-## Phy_Di_log:Precipitation
-Simplified_mod998 = with(total_data, adonis2(BC_dist_field ~ Site_pool + Phy_Di_log + Fun_Di_log + Soil_ph + Wcont + Soil_N + Tave + Precipitation + 
-                                               Phy_Di_log:Tave + Phy_Di_log:Wcont, 
-                                             data = total_data, permutations = 999, strata = Years))
-
-Simplified_mod998
-AICcPermanova::AICc_permanova2(Simplified_mod998)
-mod_Simplified8 = as.data.frame(AICcPermanova::AICc_permanova2(Simplified_mod998)); mod_Simplified8$form = "mod8 ~ -Phy_Di_log:Precipitation"
-
 ### 模型比较
 mod_all_results = rbind(mod_full_results,mod_Simplified1,mod_Simplified2,mod_Simplified3,mod_Simplified4,
-                        mod_Simplified5,mod_Simplified6,mod_Simplified7,mod_Simplified8)
+                        mod_Simplified5,mod_Simplified6,mod_Simplified7)
 min_AICc = min(mod_all_results$AICc)
 mod_all_results$DeltaAICc = mod_all_results$AICc - min_AICc
 
@@ -198,11 +190,12 @@ mod_all_sub
 
 ################################################################################
 # p.adjust
-perManova_data = as.data.frame(Simplified_mod998)
+perManova_data = as.data.frame(Simplified_mod997)
 perManova_data$`q-vaules`=p.adjust(perManova_data$`Pr(>F)`, method = "holm")
 perManova_data$`Pr(>F)` = round(perManova_data$`Pr(>F)`, 3)
 perManova_data$`F` = round(perManova_data$`F`, 2)
 perManova_data$`q-vaules` = round(perManova_data$`q-vaules`, 3)
+perManova_data$R2 = round(perManova_data$R2, 3)
 perManova_data
 
 ################################################################################
