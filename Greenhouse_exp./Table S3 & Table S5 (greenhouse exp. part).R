@@ -50,7 +50,7 @@ traits_mean$SRL = log10(traits_mean$SRL)
 # Permutational multivariate analysis of variance to explore the effects of plant families and species on fungal composition
 set.seed(1234)
 bray_dist <- vegdist(species_hel, method = 'bray')
-adonis_result <- adonis2(bray_dist ~ Family + Species, Green_group, permutations = 999)
+adonis_result <- adonis2(bray_dist ~ Family/Species, Green_group, permutations = 999)
 adonis_result
 # p.adjust
 permanova_data2 = as.data.frame(adonis_result)
