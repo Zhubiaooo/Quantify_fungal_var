@@ -21,7 +21,7 @@ all_otu <- read.xlsx("Greenhouse_data_asv.xlsx", sheet = "all_otu_data2", colNam
 
 #### Effect of family and species on fungal richness
 colnames(all_otu)
-mod = lm(Overall_Richness ~ Family + Species , data = all_otu)
+mod = lm(Overall_Richness ~ Family/Species , data = all_otu)
 tables2 = as.data.frame(anova(mod))
 tables2$`q-vaules`=p.adjust(tables2$`Pr(>F)`, method = "holm")
 tables2$`Pr(>F)` = round(tables2$`Pr(>F)`, 4)
