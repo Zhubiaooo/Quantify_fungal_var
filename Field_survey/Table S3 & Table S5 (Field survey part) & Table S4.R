@@ -76,9 +76,9 @@ rownames(species_hel) %in% rownames(Field_group_scale)
 
 # Table 1 (field survey part)
 set.seed(1234)
-mod1 = vegan::adonis2(BC_dist_field ~ Years + Site + Family + Species + 
+mod1 = vegan::adonis2(BC_dist_field ~ Years + Site + Family/Species + 
                         Family:Years + Family:Site + Family:Years:Site + 
-                        Species:Years + Species:Site,
+                        Family/Species:Years + Family/Species:Site,
                       data = Field_group_scale, permutations = 999)
 mod1
 permanova_TOTAL = as.data.frame(mod1)
